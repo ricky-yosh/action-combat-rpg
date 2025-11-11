@@ -3,11 +3,17 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+# Stores the x/y direction the player is trying to look in
+var _look = Vector2.ZERO
+
+@export var mouse_sensitivity = 0.00075
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
+	# Needs to be in physics_process because we interact with the SpringArm which is a physics body
+	frame_camera_motion()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -32,3 +38,12 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		if event is InputEventMouseMotion:
+			# if running at higher framerates rewriting _look will cause problems
+			# We need to accumilate the mouse movement in those extra frames using +=
+			_look += -event.relative * mouse_sensitivity
+
+func frame_camera_motion() -> void:
+	$SpringArm3D.rotate_y(_look.x)
+	_look = Vector2.ZERO
