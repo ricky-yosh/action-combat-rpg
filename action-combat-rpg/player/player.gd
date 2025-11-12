@@ -6,7 +6,13 @@ const JUMP_VELOCITY = 4.5
 # Stores the x/y direction the player is trying to look in
 var _look = Vector2.ZERO
 
-@export var mouse_sensitivity = 0.00075
+@export var mouse_sensitivity: float = 0.00075
+@export var min_boundary: float = -60
+@export var max_boundary: float = 10
+
+
+@onready var horizontal_pivot: Node3D = $HorizontalPivot
+@onready var vertical_pivot: Node3D = $HorizontalPivot/VerticalPivot
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -45,5 +51,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			_look += -event.relative * mouse_sensitivity
 
 func frame_camera_motion() -> void:
-	$SpringArm3D.rotate_y(_look.x)
+	horizontal_pivot.rotate_y(_look.x)
+	vertical_pivot.rotate_x(_look.y)
+	
+	vertical_pivot.rotation.x = clampf(vertical_pivot.rotation.x, deg_to_rad(min_boundary), deg_to_rad(max_boundary))
+	
+	$SpringArm3D.global_transform = vertical_pivot.global_transform
 	_look = Vector2.ZERO
