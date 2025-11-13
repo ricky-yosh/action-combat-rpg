@@ -56,5 +56,4 @@ func frame_camera_motion() -> void:
 	
 	vertical_pivot.rotation.x = clampf(vertical_pivot.rotation.x, deg_to_rad(min_boundary), deg_to_rad(max_boundary))
 	
-	$SpringArm3D.global_transform = vertical_pivot.global_transform
 	_look = Vector2.ZERO
