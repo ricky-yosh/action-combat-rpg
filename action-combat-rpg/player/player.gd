@@ -57,6 +57,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			# if running at higher framerates rewriting _look will cause problems
 			# We need to accumilate the mouse movement in those extra frames using +=
 			_look += -event.relative * mouse_sensitivity
+	if rig.is_idle():
+		if event.is_action_pressed("click"):
+			slash_attack()
 
 func frame_camera_motion() -> void:
 	horizontal_pivot.rotate_y(_look.x)
@@ -74,3 +77,6 @@ func look_towards_direction(direction: Vector3, delta: float) -> void:
 		target_transform,
 		1.0 - exp(-animation_decay * delta)
 	)
+
+func slash_attack() -> void:
+	rig.travel("Slash")
