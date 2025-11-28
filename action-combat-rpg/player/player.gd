@@ -18,6 +18,7 @@ var _attack_direction := Vector3.ZERO
 @onready var vertical_pivot: Node3D = $HorizontalPivot/VerticalPivot
 @onready var rig_pivot: Node3D = $RigPivot
 @onready var rig: Node3D = $RigPivot/Rig
+@onready var attack_cast: RayCast3D = %AttackCast
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -25,25 +26,15 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Needs to be in physics_process because we interact with the SpringArm which is a physics body
 	frame_camera_motion()
+	var direction := get_movement_direction()
+	rig.update_animation_tree(direction)
+	handle_idle_physics_frame(delta, direction)
+	handle_slashing_physics_frame(delta)
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		
-	var direction := get_movement_direction()
-	rig.update_animation_tree(direction)
-	
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-		look_towards_direction(direction, delta)
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-	handle_slashing_physics_frame(delta)
 	move_and_slide()
 
 func get_movement_direction() -> Vector3:
@@ -86,6 +77,18 @@ func slash_attack() -> void:
 	_attack_direction = get_movement_direction()
 	if _attack_direction.is_zero_approx():
 		_attack_direction = rig.global_basis * Vector3.MODEL_FRONT
+	attack_cast.clear_exceptions()
+
+func handle_idle_physics_frame(delta: float, direction: Vector3) -> void:
+	if not rig.is_idle():
+		return
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+		look_towards_direction(direction, delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 func handle_slashing_physics_frame(delta: float) -> void:
 	if not rig.is_slashing():
@@ -93,3 +96,4 @@ func handle_slashing_physics_frame(delta: float) -> void:
 	velocity.x = _attack_direction.x * attack_move_speed
 	velocity.z = _attack_direction.z * attack_move_speed
 	look_towards_direction(_attack_direction, delta)
+	attack_cast.deal_damage()
