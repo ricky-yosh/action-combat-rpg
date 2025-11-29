@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctii03klxetrs"]
+[gd_scene load_steps=5 format=3 uid="uid://ctii03klxetrs"]
 
 [ext_resource type="PackedScene" uid="uid://gvp78p80kme3" path="res://player/rig.tscn" id="1_2mvqj"]
 [ext_resource type="Script" uid="uid://e7mwffb3774n" path="res://enemy/enemy.gd" id="1_ofsxj"]
+[ext_resource type="PackedScene" uid="uid://deipdw0jxd12n" path="res://components/health_component.tscn" id="3_ppra6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ofsxj"]
 
 [node name="Enemy" type="CharacterBody3D"]
+collision_layer = 9
 script = ExtResource("1_ofsxj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -13,4 +15,5 @@ shape = SubResource("CapsuleShape3D_ofsxj")
 
 [node name="Rig" parent="." instance=ExtResource("1_2mvqj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-animation_speed = 10.0
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_ppra6")]
