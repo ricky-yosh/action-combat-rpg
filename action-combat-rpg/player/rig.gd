@@ -32,12 +32,19 @@ func update_animation_tree(direction: Vector3) -> void:
 func travel(animation_name: String) -> void:
 	playback.travel(animation_name)
 
+#region Boolean Helpers
+
 func is_idle() -> bool:
 	return playback.get_current_node() == "MoveSpace"
 
 func is_slashing() -> bool:
 	return playback.get_current_node() == "Slash"
-	
+
+func is_overhead() -> bool:
+	return playback.get_current_node() == "Overhead"
+
+#endregion
+
 func set_active_mesh(active_mesh: MeshInstance3D) -> void:
 	for child in skeleton_3d.get_children():
 		child.visible = false
