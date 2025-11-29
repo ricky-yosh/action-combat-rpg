@@ -11,7 +11,6 @@ var current_health: float:
 		if current_health == 0.0:
 			defeat.emit()
 		health_changed.emit()
-		print(current_health)
 
 func update_max_health(max_hp_in: float) -> void:
 	max_health = max_hp_in

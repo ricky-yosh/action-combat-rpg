@@ -1,10 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctii03klxetrs"]
+[gd_scene load_steps=6 format=3 uid="uid://ctii03klxetrs"]
 
 [ext_resource type="PackedScene" uid="uid://gvp78p80kme3" path="res://player/rig.tscn" id="1_2mvqj"]
 [ext_resource type="Script" uid="uid://e7mwffb3774n" path="res://enemy/enemy.gd" id="1_ofsxj"]
 [ext_resource type="PackedScene" uid="uid://deipdw0jxd12n" path="res://components/health_component.tscn" id="3_ppra6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ofsxj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ppra6"]
 
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 9
@@ -17,3 +19,11 @@ shape = SubResource("CapsuleShape3D_ofsxj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_ppra6")]
+
+[node name="PlayerDetector" type="ShapeCast3D" parent="."]
+shape = SubResource("CapsuleShape3D_ppra6")
+target_position = Vector3(0, 0, 1)
+collision_mask = 4
+
+[connection signal="heavy_attack" from="Rig" to="." method="_on_rig_heavy_attack"]
+[connection signal="defeat" from="HealthComponent" to="." method="_on_health_component_defeat"]
