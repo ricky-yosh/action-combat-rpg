@@ -15,6 +15,8 @@ var _attack_direction := Vector3.ZERO
 @export var max_boundary: float = 10
 @export var animation_decay: float = 20.0
 @export var attack_move_speed: float = 3.0
+@export_category("RPG Stats")
+@export var stats: CharacterStats
 
 @onready var horizontal_pivot: Node3D = $HorizontalPivot
 @onready var vertical_pivot: Node3D = $HorizontalPivot/VerticalPivot
@@ -28,6 +30,7 @@ var _attack_direction := Vector3.ZERO
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	health_component.update_max_health(30.0)
+	print(stats.get_base_speed())
 
 func _physics_process(delta: float) -> void:
 	# Needs to be in physics_process because we interact with the SpringArm which is a physics body

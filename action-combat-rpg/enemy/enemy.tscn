@@ -26,6 +26,7 @@ target_position = Vector3(0, 0, 1)
 collision_mask = 4
 
 [node name="AreaAttack" parent="Rig" instance=ExtResource("3_p200p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
 collision_mask = 4
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_ppra6")]
