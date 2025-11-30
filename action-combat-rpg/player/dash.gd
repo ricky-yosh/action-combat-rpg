@@ -1,8 +1,10 @@
 extends Node3D
 
 @export var player: Player
+@export var speed_multiplier: float = 3.0
 
 @onready var timer: Timer = $Timer
+@onready var gpu_particles_3d: GPUParticles3D = $GPUParticles3D
 
 var direction := Vector3.ZERO
 var dash_duration := 0.1
@@ -17,12 +19,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		var player_is_moving: bool = not direction.is_zero_approx()
 		if player_is_moving:
 			player.rig.travel("Dash")
+			gpu_particles_3d.emitting = true
 			timer.start(1.0)
+			time_remaining = dash_duration
 
 func _physics_process(delta: float) -> void:
 	if direction.is_zero_approx():
 		return
-	player.velocity = direction * player.SPEED * 5.0
+	player.velocity = direction * player.SPEED * speed_multiplier
 	time_remaining -= delta
 	if time_remaining <= 0:
 		direction = Vector3.ZERO
+		gpu_particles_3d.emitting = false

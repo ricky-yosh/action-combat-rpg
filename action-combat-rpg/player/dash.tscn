@@ -1,6 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://bof88r5pkixya"]
+[gd_scene load_steps=7 format=3 uid="uid://bof88r5pkixya"]
 
 [ext_resource type="Script" uid="uid://bj5kr4s1psk2p" path="res://player/dash.gd" id="1_ywr6a"]
+
+[sub_resource type="Curve" id="Curve_ywr6a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.858619, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dxhus"]
+curve = SubResource("Curve_ywr6a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i3jmb"]
+emission_shape_scale = Vector3(1, 0.25, 1)
+emission_shape = 1
+emission_sphere_radius = 0.5
+gravity = Vector3(0, 1, 0)
+damping_max = 1.0
+scale_min = 0.19999999
+scale_max = 0.39999998
+scale_curve = SubResource("CurveTexture_dxhus")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xbtvb"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_ku7mo"]
+material = SubResource("StandardMaterial3D_xbtvb")
 
 [node name="Dash" type="Node3D"]
 script = ExtResource("1_ywr6a")
@@ -9,3 +34,8 @@ script = ExtResource("1_ywr6a")
 one_shot = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+cast_shadow = 0
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_i3jmb")
+draw_pass_1 = SubResource("SphereMesh_ku7mo")

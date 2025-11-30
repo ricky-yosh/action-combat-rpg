@@ -43,6 +43,9 @@ func is_slashing() -> bool:
 func is_overhead() -> bool:
 	return playback.get_current_node() == "Overhead"
 
+func is_dashing() -> bool:
+	return playback.get_current_node() == "Dash"
+	
 #endregion
 
 func set_active_mesh(active_mesh: MeshInstance3D) -> void:
