@@ -29,7 +29,8 @@ collision_mask = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
 collision_mask = 4
 
-[node name="HealthComponent" parent="." instance=ExtResource("3_ppra6")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("body") instance=ExtResource("3_ppra6")]
+body = NodePath("..")
 
 [connection signal="heavy_attack" from="Rig" to="." method="_on_rig_heavy_attack"]
 [connection signal="defeat" from="HealthComponent" to="." method="_on_health_component_defeat"]

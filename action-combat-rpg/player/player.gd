@@ -1,7 +1,6 @@
 extends CharacterBody3D
 class_name Player
 
-const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const DECAY := 8.0
 
@@ -30,7 +29,6 @@ var _attack_direction := Vector3.ZERO
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	health_component.update_max_health(30.0)
-	print(stats.get_base_speed())
 
 func _physics_process(delta: float) -> void:
 	# Needs to be in physics_process because we interact with the SpringArm which is a physics body
@@ -66,6 +64,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			slash_attack()
 		if event.is_action_pressed("right_click"):
 			rig.travel("Overhead")
+	if event.is_action("debug_gain_xp"):
+		stats.xp += 10_000
+		print(stats.level)
 
 func frame_camera_motion() -> void:
 	horizontal_pivot.rotate_y(_look.x)
@@ -98,21 +99,18 @@ func handle_idle_physics_frame(delta: float, direction: Vector3) -> void:
 		return
 	velocity.x = exponential_decay(
 		velocity.x,
-		direction.x * SPEED,
+		direction.x * stats.get_base_speed(),
 		DECAY,
 		delta
 	)
 	velocity.z = exponential_decay(
 		velocity.z,
-		direction.z * SPEED,
+		direction.z * stats.get_base_speed(),
 		DECAY,
 		delta
 	)
 	if direction:
 		look_towards_direction(direction, delta)
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 func handle_slashing_physics_frame(delta: float) -> void:
 	if not rig.is_slashing():
@@ -120,7 +118,7 @@ func handle_slashing_physics_frame(delta: float) -> void:
 	velocity.x = _attack_direction.x * attack_move_speed
 	velocity.z = _attack_direction.z * attack_move_speed
 	look_towards_direction(_attack_direction, delta)
-	attack_cast.deal_damage()
+	attack_cast.deal_damage(10.0 + stats.get_damage_modifier(), stats.get_crit_chance())
 
 func handle_overhead_physics_frame() -> void:
 	if not rig.is_overhead():
@@ -137,7 +135,7 @@ func _on_health_component_defeat() -> void:
 	set_physics_process(false)
 
 func _on_rig_heavy_attack() -> void:
-	area_attack.deal_damage(50.0)
+	area_attack.deal_damage(10.0 + stats.get_damage_modifier(), stats.get_crit_chance())
 
 func exponential_decay(a: float, b: float, decay: float, delta: float):
 	return b + (a - b) * exp(-decay * delta)
