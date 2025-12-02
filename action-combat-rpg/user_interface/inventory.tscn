@@ -1,0 +1,120 @@
+[gd_scene load_steps=10 format=3 uid="uid://82081hda2o2r"]
+
+[ext_resource type="Texture2D" uid="uid://bm0foenkdpyvl" path="res://assets/UIAssets/Window/window_header.png" id="1_hhbwd"]
+[ext_resource type="FontFile" uid="uid://b76fmvbv2ocuf" path="res://assets/Fonts/Libre_Caslon_Text/LibreCaslonText-Bold.ttf" id="2_u7gih"]
+[ext_resource type="Texture2D" uid="uid://dtirdotjr8pc" path="res://assets/UIAssets/Window/window_c.png" id="3_faefm"]
+[ext_resource type="StyleBox" uid="uid://cufo32v0biplv" path="res://user_interface/ui_panel.tres" id="4_j1htc"]
+
+[sub_resource type="Gradient" id="Gradient_5vwyw"]
+offsets = PackedFloat32Array(0.047244094, 0.31102362, 0.86614174)
+colors = PackedColorArray(0.6562505, 0.36768934, 0.084979884, 1, 0.43584713, 0.27879328, 2.8878452e-07, 1, 0.20830545, 0.13026813, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hhbwd"]
+gradient = SubResource("Gradient_5vwyw")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_faefm"]
+font = ExtResource("2_u7gih")
+font_size = 48
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j1htc"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("3_faefm")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_j1htc"]
+font = ExtResource("2_u7gih")
+font_size = 32
+font_color = Color(0.85490197, 0.5294118, 0.30588236, 1)
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundGradient" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_hhbwd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HeaderTexture" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_hhbwd")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HeaderTexture"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Inventory"
+label_settings = SubResource("LabelSettings_faefm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+
+[node name="HeldItems" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_j1htc")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(384, 0)
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_j1htc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level 1"
+label_settings = SubResource("LabelSettings_j1htc")
+horizontal_alignment = 1
