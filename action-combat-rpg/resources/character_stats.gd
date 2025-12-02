@@ -2,6 +2,7 @@ extends Resource
 class_name CharacterStats
 
 signal level_up_notification()
+signal update_stats()
 
 class Ability:
 	var min_modifier: float
@@ -28,11 +29,12 @@ var level := 1
 var xp := 0:
 	set(value):
 		xp = value
-		var boundary = cubic_level_up_boundary()
+		var boundary = level_up_boundary()
 		while xp > boundary:
 			xp -= boundary
 			level_up()
-			boundary = cubic_level_up_boundary()
+			boundary = level_up_boundary()
+		update_stats.emit()
 
 const MIN_DASH_COOLDOWN := 1.5
 const MAX_DASH_COOLDOWN := 0.5
@@ -69,5 +71,6 @@ func level_up() -> void:
 	agility.increase()
 	level_up_notification.emit()
 
-func cubic_level_up_boundary() -> int:
+func level_up_boundary() -> int:
+	# Cubic level up system
 	return int(50 + pow(level, 3))

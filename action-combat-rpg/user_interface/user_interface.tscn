@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdan1fslfunjl"]
+[gd_scene load_steps=8 format=3 uid="uid://bdan1fslfunjl"]
 
 [ext_resource type="Texture2D" uid="uid://3el183m80a0a" path="res://assets/UIAssets/Unitframe/HealthBarUnder.png" id="1_dbod7"]
+[ext_resource type="Script" uid="uid://dv18sxw0dd01x" path="res://user_interface/user_interface.gd" id="1_og86u"]
 [ext_resource type="Texture2D" uid="uid://cl6u2n3xnk3xt" path="res://assets/UIAssets/Unitframe/HealthBarOver.png" id="2_ur1vw"]
+[ext_resource type="Texture2D" uid="uid://qtoherrplh5w" path="res://assets/UIAssets/Unitframe/MainBar.png" id="3_n3kvg"]
+[ext_resource type="FontFile" uid="uid://b76fmvbv2ocuf" path="res://assets/Fonts/Libre_Caslon_Text/LibreCaslonText-Bold.ttf" id="3_ur1vw"]
+[ext_resource type="Texture2D" uid="uid://dwjgvhqky3bon" path="res://assets/UIAssets/Unitframe/BlueBar.png" id="4_fea8n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_og86u"]
+font = ExtResource("3_ur1vw")
+font_size = 28
+font_color = Color(0.8544403, 0.5291301, 0.30559868, 1)
 
 [node name="UserInterface" type="Control"]
 layout_mode = 3
@@ -11,6 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_og86u")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -35,8 +45,53 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_dbod7")
 
+[node name="HealthBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+texture_progress = ExtResource("3_n3kvg")
+
+[node name="HealthLabel" type="Label" parent="MarginContainer/InfoBar/HealthBarUnder/HealthBar"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 124.0
+offset_top = 17.0
+offset_right = 277.0
+offset_bottom = 55.0
+text = "1000/1000"
+label_settings = SubResource("LabelSettings_og86u")
+vertical_alignment = 1
+
+[node name="XPBar" type="TextureProgressBar" parent="MarginContainer/InfoBar/HealthBarUnder"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+texture_progress = ExtResource("4_fea8n")
+
 [node name="HealthBarOver" type="TextureRect" parent="MarginContainer/InfoBar"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_ur1vw")
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/InfoBar/HealthBarOver"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 98.0
+grow_vertical = 2
+text = "999"
+label_settings = SubResource("LabelSettings_og86u")
+horizontal_alignment = 1
+vertical_alignment = 1
