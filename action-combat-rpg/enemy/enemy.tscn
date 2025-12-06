@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctii03klxetrs"]
+[gd_scene load_steps=12 format=3 uid="uid://ctii03klxetrs"]
 
 [ext_resource type="PackedScene" uid="uid://gvp78p80kme3" path="res://player/rig.tscn" id="1_2mvqj"]
 [ext_resource type="Script" uid="uid://e7mwffb3774n" path="res://enemy/enemy.gd" id="1_ofsxj"]
+[ext_resource type="PackedScene" uid="uid://blvllpgje6y45" path="res://assets/3D_Assets/Character/Gear/Tall_Shield.glb" id="2_1wwld"]
 [ext_resource type="PackedScene" uid="uid://d2at053xulnw1" path="res://player/area_attack.tscn" id="3_p200p"]
 [ext_resource type="PackedScene" uid="uid://deipdw0jxd12n" path="res://components/health_component.tscn" id="3_ppra6"]
+[ext_resource type="PackedScene" uid="uid://crc2tvct0hnqa" path="res://assets/3D_Assets/Character/Gear/Short_Shield.glb" id="3_y5vj3"]
+[ext_resource type="PackedScene" uid="uid://bynkvcjd8v4nh" path="res://assets/3D_Assets/Character/Gear/Broken_Sword.glb" id="4_e355f"]
+[ext_resource type="PackedScene" uid="uid://c1twtrnchjiri" path="res://assets/3D_Assets/Character/Gear/Longsword.glb" id="5_78jik"]
+[ext_resource type="PackedScene" uid="uid://dgy1v8q2n374i" path="res://assets/3D_Assets/Character/Gear/Battleaxe.glb" id="6_o3pv7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ofsxj"]
 
@@ -12,6 +17,8 @@
 [node name="Enemy" type="CharacterBody3D"]
 collision_layer = 9
 script = ExtResource("1_ofsxj")
+shields = Array[PackedScene]([ExtResource("2_1wwld"), ExtResource("3_y5vj3")])
+weapons = Array[PackedScene]([ExtResource("4_e355f"), ExtResource("5_78jik"), ExtResource("6_o3pv7")])
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
