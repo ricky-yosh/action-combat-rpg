@@ -23,7 +23,6 @@ weapons = Array[PackedScene]([ExtResource("4_e355f"), ExtResource("5_78jik"), Ex
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 avoidance_enabled = true
 avoidance_mask = 0
-debug_enabled = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ofsxj")
