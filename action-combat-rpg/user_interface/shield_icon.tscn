@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://53q0p70xsl47"]
+
+[ext_resource type="PackedScene" uid="uid://bgkvxv548x2cm" path="res://user_interface/item_icon.tscn" id="1_vbyq3"]
+[ext_resource type="Script" uid="uid://chipr6mtyjika" path="res://user_interface/shield_icon.gd" id="2_cxsci"]
+[ext_resource type="Texture2D" uid="uid://bxvr7xd72aqkv" path="res://assets/UIAssets/Icons/shield_icon.png" id="3_mrvu4"]
+
+[node name="ShieldIcon" instance=ExtResource("1_vbyq3")]
+script = ExtResource("2_cxsci")
+protection = 0
+item_model = null
+
+[node name="TypeIcon" parent="." index="0"]
+texture = ExtResource("3_mrvu4")

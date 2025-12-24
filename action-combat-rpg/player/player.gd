@@ -26,6 +26,7 @@ var _attack_direction := Vector3.ZERO
 @onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
 @onready var area_attack: ShapeCast3D = $RigPivot/AreaAttack
 @onready var user_interface: Control = $UserInterface
+@onready var interaction_cast: ShapeCast3D = $RigPivot/InteractionCast
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -44,7 +45,7 @@ func _physics_process(delta: float) -> void:
 	handle_idle_physics_frame(delta, direction)
 	handle_slashing_physics_frame(delta)
 	handle_overhead_physics_frame()
-
+	interaction_cast.check_interactions()
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -72,7 +73,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			rig.travel("Overhead")
 	if event.is_action("debug_gain_xp"):
 		stats.xp += 10_000
-		print(stats.level)
 
 func frame_camera_motion() -> void:
 	horizontal_pivot.rotate_y(_look.x)
