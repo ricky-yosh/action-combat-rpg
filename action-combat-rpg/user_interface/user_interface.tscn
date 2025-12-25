@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdan1fslfunjl"]
+[gd_scene load_steps=12 format=3 uid="uid://bdan1fslfunjl"]
 
 [ext_resource type="Texture2D" uid="uid://3el183m80a0a" path="res://assets/UIAssets/Unitframe/HealthBarUnder.png" id="1_dbod7"]
 [ext_resource type="Script" uid="uid://dv18sxw0dd01x" path="res://user_interface/user_interface.gd" id="1_og86u"]
@@ -12,6 +12,19 @@
 font = ExtResource("3_ur1vw")
 font_size = 28
 font_color = Color(0.8544403, 0.5291301, 0.30559868, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fea8n"]
+font = ExtResource("3_ur1vw")
+font_size = 24
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cxjh8"]
+color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_r6j1t"]
+font = ExtResource("3_ur1vw")
+font_size = 36
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="UserInterface" type="Control"]
 process_mode = 3
@@ -97,6 +110,30 @@ text = "999"
 label_settings = SubResource("LabelSettings_og86u")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="InteractButton" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Spacebar"
+label_settings = SubResource("LabelSettings_fea8n")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_cxjh8")
+
+[node name="InteractText" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Open Chest"
+label_settings = SubResource("LabelSettings_r6j1t")
+horizontal_alignment = 1
 
 [node name="Inventory" parent="." instance=ExtResource("7_fea8n")]
 visible = false
