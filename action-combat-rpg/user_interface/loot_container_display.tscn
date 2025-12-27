@@ -37,7 +37,8 @@ texture = ExtResource("3_kfwwm")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TitleTexture"]
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer/TitleTexture"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
