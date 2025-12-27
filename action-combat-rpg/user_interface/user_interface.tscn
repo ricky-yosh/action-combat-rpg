@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdan1fslfunjl"]
+[gd_scene load_steps=16 format=3 uid="uid://bdan1fslfunjl"]
 
 [ext_resource type="Texture2D" uid="uid://3el183m80a0a" path="res://assets/UIAssets/Unitframe/HealthBarUnder.png" id="1_dbod7"]
 [ext_resource type="Script" uid="uid://dv18sxw0dd01x" path="res://user_interface/user_interface.gd" id="1_og86u"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b76fmvbv2ocuf" path="res://assets/Fonts/Libre_Caslon_Text/LibreCaslonText-Bold.ttf" id="3_ur1vw"]
 [ext_resource type="Texture2D" uid="uid://dwjgvhqky3bon" path="res://assets/UIAssets/Unitframe/BlueBar.png" id="4_fea8n"]
 [ext_resource type="PackedScene" uid="uid://82081hda2o2r" path="res://user_interface/inventory.tscn" id="7_fea8n"]
+[ext_resource type="PackedScene" uid="uid://cj0n08d7xvjjd" path="res://user_interface/loot_container_display.tscn" id="8_cxjh8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_og86u"]
 font = ExtResource("3_ur1vw")
@@ -25,6 +26,67 @@ color = Color(1, 1, 1, 1)
 font = ExtResource("3_ur1vw")
 font_size = 36
 shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_cxjh8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/VBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fea8n"]
+resource_name = "fade_out_text"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/VBoxContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r6j1t"]
+_data = {
+&"RESET": SubResource("Animation_cxjh8"),
+&"fade_out_text": SubResource("Animation_fea8n")
+}
 
 [node name="UserInterface" type="Control"]
 process_mode = 3
@@ -112,6 +174,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(512, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -130,6 +194,7 @@ layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_cxjh8")
 
 [node name="InteractText" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Open Chest"
 label_settings = SubResource("LabelSettings_r6j1t")
@@ -138,3 +203,17 @@ horizontal_alignment = 1
 [node name="Inventory" parent="." instance=ExtResource("7_fea8n")]
 visible = false
 layout_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_r6j1t")
+}
+autoplay = "RESET"
+
+[node name="LootContainerDisplay" parent="." instance=ExtResource("8_cxjh8")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
