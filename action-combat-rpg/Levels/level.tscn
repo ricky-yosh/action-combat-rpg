@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d14mf81cmioqs"]
+[gd_scene load_steps=34 format=3 uid="uid://d14mf81cmioqs"]
 
 [ext_resource type="PackedScene" uid="uid://v2khj85gxssc" path="res://player/player.tscn" id="1_80vhd"]
 [ext_resource type="PackedScene" uid="uid://blue66jjx45rj" path="res://assets/3D_Assets/Environment/Path_Stepping_Stone_Env_02.glb" id="1_u6cys"]
@@ -25,7 +25,9 @@
 [ext_resource type="PackedScene" uid="uid://tfvbn13uwhkj" path="res://user_interface/currency_icon.tscn" id="20_werwd"]
 [ext_resource type="PackedScene" uid="uid://clg2yhduknmbm" path="res://user_interface/armor_icon.tscn" id="21_of21v"]
 [ext_resource type="PackedScene" uid="uid://dpr88r41j6q2c" path="res://user_interface/weapon_icon.tscn" id="23_80cyg"]
+[ext_resource type="PackedScene" uid="uid://bynkvcjd8v4nh" path="res://assets/3D_Assets/Character/Gear/Broken_Sword.glb" id="24_axqo2"]
 [ext_resource type="PackedScene" uid="uid://53q0p70xsl47" path="res://user_interface/shield_icon.tscn" id="24_mca5t"]
+[ext_resource type="PackedScene" uid="uid://dgy1v8q2n374i" path="res://assets/3D_Assets/Character/Gear/Battleaxe.glb" id="25_8henu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_54b6e"]
 sky_top_color = Color(0.242, 0.37546667, 0.55, 1)
@@ -303,6 +305,20 @@ visible = false
 visible = false
 value = 110
 
+[node name="WeaponIcon2" parent="NavigationRegion3D/Interactable/Chest2" instance=ExtResource("23_80cyg")]
+visible = false
+power = 4
+item_model = ExtResource("24_axqo2")
+
+[node name="WeaponIcon3" parent="NavigationRegion3D/Interactable/Chest2" instance=ExtResource("23_80cyg")]
+visible = false
+power = 8
+
+[node name="WeaponIcon4" parent="NavigationRegion3D/Interactable/Chest2" instance=ExtResource("23_80cyg")]
+visible = false
+power = 12
+item_model = ExtResource("25_8henu")
+
 [node name="Chest3" parent="NavigationRegion3D/Interactable" instance=ExtResource("19_574oa")]
 transform = Transform3D(-0.76042855, 0, -0.6494215, 0, 1, 0, 0.6494215, 0, -0.76042855, -12.611522, 0, 16.168056)
 
@@ -315,7 +331,7 @@ visible = false
 value = 30
 
 [node name="Player" parent="." instance=ExtResource("1_80vhd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1669397, 1, 13.550652)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0168967, 0.99999905, -0.118382454)
 
 [node name="Enemy" type="Node3D" parent="."]
 

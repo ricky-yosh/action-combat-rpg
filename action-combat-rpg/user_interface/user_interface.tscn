@@ -210,5 +210,6 @@ libraries = {
 }
 autoplay = "RESET"
 
-[node name="LootContainerDisplay" parent="." instance=ExtResource("8_cxjh8")]
+[node name="LootContainerDisplay" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("8_cxjh8")]
 layout_mode = 1
+inventory = NodePath("../Inventory")
