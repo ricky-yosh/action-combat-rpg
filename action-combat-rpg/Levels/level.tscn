@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://d14mf81cmioqs"]
+[gd_scene load_steps=35 format=3 uid="uid://d14mf81cmioqs"]
 
 [ext_resource type="PackedScene" uid="uid://v2khj85gxssc" path="res://player/player.tscn" id="1_80vhd"]
 [ext_resource type="PackedScene" uid="uid://blue66jjx45rj" path="res://assets/3D_Assets/Environment/Path_Stepping_Stone_Env_02.glb" id="1_u6cys"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://bynkvcjd8v4nh" path="res://assets/3D_Assets/Character/Gear/Broken_Sword.glb" id="24_axqo2"]
 [ext_resource type="PackedScene" uid="uid://53q0p70xsl47" path="res://user_interface/shield_icon.tscn" id="24_mca5t"]
 [ext_resource type="PackedScene" uid="uid://dgy1v8q2n374i" path="res://assets/3D_Assets/Character/Gear/Battleaxe.glb" id="25_8henu"]
+[ext_resource type="PackedScene" uid="uid://crc2tvct0hnqa" path="res://assets/3D_Assets/Character/Gear/Short_Shield.glb" id="27_8henu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_54b6e"]
 sky_top_color = Color(0.242, 0.37546667, 0.55, 1)
@@ -294,6 +295,12 @@ visible = false
 
 [node name="ArmorIcon" parent="NavigationRegion3D/Interactable/Chest" instance=ExtResource("21_of21v")]
 visible = false
+protection = 20
+
+[node name="ArmorIcon2" parent="NavigationRegion3D/Interactable/Chest" instance=ExtResource("21_of21v")]
+visible = false
+protection = 40
+armor = 1
 
 [node name="Chest2" parent="NavigationRegion3D/Interactable" instance=ExtResource("19_574oa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.722675, 0, -14.953278)
@@ -324,7 +331,12 @@ transform = Transform3D(-0.76042855, 0, -0.6494215, 0, 1, 0, 0.6494215, 0, -0.76
 
 [node name="ShieldIcon" parent="NavigationRegion3D/Interactable/Chest3" instance=ExtResource("24_mca5t")]
 visible = false
-protection = 10
+protection = 15
+
+[node name="ShieldIcon2" parent="NavigationRegion3D/Interactable/Chest3" instance=ExtResource("24_mca5t")]
+visible = false
+protection = 5
+item_model = ExtResource("27_8henu")
 
 [node name="CurrencyIcon" parent="NavigationRegion3D/Interactable/Chest3" instance=ExtResource("20_werwd")]
 visible = false
