@@ -35,6 +35,10 @@ folder_colors={
 "res://addons/": "gray"
 }
 
+[global_group]
+
+Rig=""
+
 [input]
 
 move_forward={
