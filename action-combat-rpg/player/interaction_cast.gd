@@ -1,5 +1,6 @@
 extends ShapeCast3D
 
+@export var player: Player
 @export var ui: Control
 
 func check_interactions() -> void:
@@ -10,3 +11,8 @@ func check_interactions() -> void:
 			if Input.is_action_just_pressed("interact"):
 				print(collider.get_items())
 				ui.open_loot_container(collider)
+		
+		if collider is Passage:
+			ui.update_interact_text("Travel")
+			if Input.is_action_just_pressed("interact"):
+				collider.travel(player)

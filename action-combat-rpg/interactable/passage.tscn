@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc3uy31jvqiap"]
+
+[ext_resource type="Script" uid="uid://ddhicgw0vrmg7" path="res://interactable/passage.gd" id="1_ve205"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_npwdp"]
+albedo_color = Color(0, 0, 0, 1)
+proximity_fade_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ve205"]
+material = SubResource("StandardMaterial3D_npwdp")
+size = Vector3(5, 4, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4jlky"]
+data = PackedVector3Array(-2.5, 2, 0.5, 2.5, 2, 0.5, -2.5, -2, 0.5, 2.5, 2, 0.5, 2.5, -2, 0.5, -2.5, -2, 0.5, 2.5, 2, -0.5, -2.5, 2, -0.5, 2.5, -2, -0.5, -2.5, 2, -0.5, -2.5, -2, -0.5, 2.5, -2, -0.5, 2.5, 2, 0.5, 2.5, 2, -0.5, 2.5, -2, 0.5, 2.5, 2, -0.5, 2.5, -2, -0.5, 2.5, -2, 0.5, -2.5, 2, -0.5, -2.5, 2, 0.5, -2.5, -2, -0.5, -2.5, 2, 0.5, -2.5, -2, 0.5, -2.5, -2, -0.5, 2.5, 2, 0.5, -2.5, 2, 0.5, 2.5, 2, -0.5, -2.5, 2, 0.5, -2.5, 2, -0.5, 2.5, 2, -0.5, -2.5, -2, 0.5, 2.5, -2, 0.5, -2.5, -2, -0.5, 2.5, -2, 0.5, 2.5, -2, -0.5, -2.5, -2, -0.5)
+
+[node name="Passage" type="StaticBody3D"]
+collision_layer = 3
+script = ExtResource("1_ve205")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ve205")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_4jlky")

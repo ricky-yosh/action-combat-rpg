@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://d14mf81cmioqs"]
+[gd_scene load_steps=36 format=3 uid="uid://d14mf81cmioqs"]
 
 [ext_resource type="PackedScene" uid="uid://v2khj85gxssc" path="res://player/player.tscn" id="1_80vhd"]
 [ext_resource type="PackedScene" uid="uid://blue66jjx45rj" path="res://assets/3D_Assets/Environment/Path_Stepping_Stone_Env_02.glb" id="1_u6cys"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://53q0p70xsl47" path="res://user_interface/shield_icon.tscn" id="24_mca5t"]
 [ext_resource type="PackedScene" uid="uid://dgy1v8q2n374i" path="res://assets/3D_Assets/Character/Gear/Battleaxe.glb" id="25_8henu"]
 [ext_resource type="PackedScene" uid="uid://crc2tvct0hnqa" path="res://assets/3D_Assets/Character/Gear/Short_Shield.glb" id="27_8henu"]
+[ext_resource type="PackedScene" uid="uid://dc3uy31jvqiap" path="res://interactable/passage.tscn" id="28_rm7tw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_54b6e"]
 sky_top_color = Color(0.242, 0.37546667, 0.55, 1)
@@ -341,6 +342,9 @@ item_model = ExtResource("27_8henu")
 [node name="CurrencyIcon" parent="NavigationRegion3D/Interactable/Chest3" instance=ExtResource("20_werwd")]
 visible = false
 value = 30
+
+[node name="Passage" parent="NavigationRegion3D/Interactable" instance=ExtResource("28_rm7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8114327, 1.9113687, -23.55826)
 
 [node name="Player" parent="." instance=ExtResource("1_80vhd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0168967, 0.99999905, -0.118382454)
