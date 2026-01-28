@@ -1,13 +1,16 @@
+## Tab bar that can show tabs in multiple lines (wrap), when there is not enough horizontal space.
 @tool
 extends PanelContainer
 
-const CLOSE_BTN_SPACER: String = "   "
+const CLOSE_BTN_SPACER: String = "    "
 
 const CustomTab := preload("custom_tab.gd")
 
 @onready var multiline_tab_bar: HFlowContainer = %MultilineTabBar
+@onready var split_btn: Button = %SplitBtn
 @onready var popup_btn: Button = %PopupBtn
 
+#region Theme
 var tab_hovered: StyleBoxFlat
 var tab_focus: StyleBoxFlat
 var tab_selected: StyleBoxFlat
@@ -16,34 +19,58 @@ var tab_unselected: StyleBoxFlat
 var font_selected_color: Color
 var font_unselected_color: Color
 var font_hovered_color: Color
+#endregion
 
 var show_close_button_always: bool = false : set = set_show_close_button_always
 var is_singleline_tabs: bool = false : set = set_singleline_tabs
 
 var tab_group: ButtonGroup = ButtonGroup.new()
 
+# Existing components, set from the plugin
 var script_filter_txt: LineEdit
 var scripts_item_list: ItemList
 var scripts_tab_container: TabContainer
 var popup: PopupPanel
-
+# Reference back to the plugin, untyped
 var plugin: EditorPlugin
 
 var suppress_theme_changed: bool
 
+var split: bool
+var split_icon: Texture2D
 var last_drag_over_tab: CustomTab
 var drag_marker: ColorRect
 var current_tab: CustomTab
 
+func _init() -> void:
+	tab_group.pressed.connect(on_new_tab_selected)
+
 #region Plugin and related tab handling processing
 func _ready() -> void:
-	popup_btn.pressed.connect(on_popup_button_pressed)
-	tab_group.pressed.connect(on_new_tab_selected)
+	popup_btn.pressed.connect(show_popup)
+	split_icon = split_btn.icon
 
 	set_process(false)
 
 	if (plugin != null):
 		schedule_update()
+
+func set_split(value: bool) -> void:
+	split = value
+
+	if (split):
+		split_btn.icon = split_icon
+
+		var text: String = scripts_item_list.get_item_text(current_tab.get_index())
+		var icon: Texture2D = scripts_item_list.get_item_icon(current_tab.get_index())
+		split_btn.text = text
+		split_btn.icon = icon
+	else:
+		split_btn.icon = split_icon
+		split_btn.text = ""
+
+func is_split() -> bool:
+	return split
 
 func _notification(what: int) -> void:
 	if (what == NOTIFICATION_DRAG_END || what == NOTIFICATION_MOUSE_EXIT):
@@ -273,9 +300,6 @@ func on_new_tab_selected(tab: CustomTab):
 		update_tab(current_tab)
 	current_tab = tab
 
-	if (is_singleline_tabs):
-		ensure_singleline_tab_visible(current_tab)
-
 ## Removes the script filter text and emits the signal so that the tabs stay
 ## and we do not break anything there.
 func update_script_text_filter():
@@ -320,7 +344,7 @@ func script_order_changed() -> void:
 func set_popup(new_popup: PopupPanel) -> void:
 	popup = new_popup
 
-func on_popup_button_pressed() -> void:
+func show_popup() -> void:
 	if (popup == null):
 		return
 
@@ -366,6 +390,7 @@ func set_singleline_tabs(new_value: bool):
 
 	if (is_singleline_tabs):
 		item_rect_changed.connect(update_singleline_tabs_width)
+		tab_group.pressed.connect(ensure_singleline_tab_visible.unbind(1))
 
 		if (multiline_tab_bar == null):
 			return
@@ -373,6 +398,7 @@ func set_singleline_tabs(new_value: bool):
 		shift_singleline_tabs_to(current_tab)
 	else:
 		item_rect_changed.disconnect(update_singleline_tabs_width)
+		tab_group.pressed.disconnect(ensure_singleline_tab_visible)
 
 		if (multiline_tab_bar == null):
 			return
@@ -380,16 +406,16 @@ func set_singleline_tabs(new_value: bool):
 		for tab: CustomTab in get_tabs():
 			tab.visible = true
 
-func ensure_singleline_tab_visible(tab: CustomTab):
-	if (tab != null && tab.visible):
+func ensure_singleline_tab_visible():
+	if (current_tab != null && current_tab.visible):
 		return
 
-	shift_singleline_tabs_to(tab)
+	shift_singleline_tabs_to(current_tab)
 
 func update_singleline_tabs_width():
-	var start: bool
-	var tab_bar_width: float = multiline_tab_bar.size.x
-	var tabs_width: float
+	if (current_tab != null && !current_tab.visible):
+		shift_singleline_tabs_to(current_tab)
+		return
 
 	for tab: CustomTab in get_tabs():
 		if (tab.visible):
@@ -400,6 +426,7 @@ func shift_singleline_tabs_to(start_tab: CustomTab):
 	var start: bool
 	var tab_bar_width: float = multiline_tab_bar.size.x
 	var tabs_width: float
+	var one_fit: bool = true
 
 	for tab: CustomTab in get_tabs():
 		if (start_tab == null || tab == start_tab):
@@ -409,12 +436,14 @@ func shift_singleline_tabs_to(start_tab: CustomTab):
 			tabs_width += tab.size.x
 
 			tab.visible = tabs_width <= tab_bar_width
+			one_fit = one_fit || tab.visible
 		else:
 			tab.visible = false
 
 	if (current_tab != null && !current_tab.visible):
-		shift_singleline_tabs_to(current_tab)
-		return
+		if (start_tab != current_tab):
+			shift_singleline_tabs_to(current_tab)
+			return
 
 	if (start_tab == null):
 		return

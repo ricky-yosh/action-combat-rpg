@@ -39,6 +39,7 @@ func _ready() -> void:
 	user_interface.inventory.armor_changed.connect(
 		health_component.update_armor_value
 	)
+	SceneTransition.fade_in()
 
 func _physics_process(delta: float) -> void:
 	# Needs to be in physics_process because we interact with the SpringArm which is a physics body
