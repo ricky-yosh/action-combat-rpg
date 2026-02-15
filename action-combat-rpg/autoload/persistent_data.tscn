@@ -21,6 +21,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
+[node name="GoldNode" type="Control" parent="." unique_id=1973600717]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
 [node name="WeaponNode" type="Control" parent="." unique_id=1431159530]
 anchors_preset = 0
 offset_right = 40.0
@@ -29,6 +35,8 @@ mouse_filter = 2
 
 [node name="WeaponIcon" parent="WeaponNode" unique_id=2044229391 instance=ExtResource("2_5iwxs")]
 layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
 
 [node name="ShieldNode" type="Control" parent="." unique_id=105807101]
 anchors_preset = 0
@@ -38,6 +46,8 @@ mouse_filter = 2
 
 [node name="ShieldIcon" parent="ShieldNode" unique_id=1423845505 instance=ExtResource("3_k4t71")]
 layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
 protection = 20
 
 [node name="ArmorNode" type="Control" parent="." unique_id=1322248175]
@@ -48,4 +58,6 @@ mouse_filter = 2
 
 [node name="ArmorIcon" parent="ArmorNode" unique_id=2000480506 instance=ExtResource("4_oww5s")]
 layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
 protection = 10

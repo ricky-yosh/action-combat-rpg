@@ -27,7 +27,6 @@
 [ext_resource type="PackedScene" uid="uid://dpr88r41j6q2c" path="res://user_interface/weapon_icon.tscn" id="23_80cyg"]
 [ext_resource type="PackedScene" uid="uid://bynkvcjd8v4nh" path="res://assets/3D_Assets/Character/Gear/Broken_Sword.glb" id="24_axqo2"]
 [ext_resource type="PackedScene" uid="uid://53q0p70xsl47" path="res://user_interface/shield_icon.tscn" id="24_mca5t"]
-[ext_resource type="PackedScene" uid="uid://dgy1v8q2n374i" path="res://assets/3D_Assets/Character/Gear/Battleaxe.glb" id="25_8henu"]
 [ext_resource type="PackedScene" uid="uid://crc2tvct0hnqa" path="res://assets/3D_Assets/Character/Gear/Short_Shield.glb" id="27_8henu"]
 [ext_resource type="PackedScene" uid="uid://dc3uy31jvqiap" path="res://interactable/passage.tscn" id="28_rm7tw"]
 
@@ -298,41 +297,16 @@ visible = false
 visible = false
 protection = 20
 
-[node name="ArmorIcon2" parent="NavigationRegion3D/Interactable/Chest" unique_id=349871038 instance=ExtResource("21_of21v")]
-visible = false
-protection = 40
-armor = 1
-
 [node name="Chest2" parent="NavigationRegion3D/Interactable" unique_id=1413714785 instance=ExtResource("19_574oa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.722675, 0, -14.953278)
-
-[node name="WeaponIcon" parent="NavigationRegion3D/Interactable/Chest2" unique_id=1043783176 instance=ExtResource("23_80cyg")]
-visible = false
-
-[node name="CurrencyIcon" parent="NavigationRegion3D/Interactable/Chest2" unique_id=327337660 instance=ExtResource("20_werwd")]
-visible = false
-value = 110
 
 [node name="WeaponIcon2" parent="NavigationRegion3D/Interactable/Chest2" unique_id=1072185342 instance=ExtResource("23_80cyg")]
 visible = false
 power = 4
 item_model = ExtResource("24_axqo2")
 
-[node name="WeaponIcon3" parent="NavigationRegion3D/Interactable/Chest2" unique_id=2109002835 instance=ExtResource("23_80cyg")]
-visible = false
-power = 8
-
-[node name="WeaponIcon4" parent="NavigationRegion3D/Interactable/Chest2" unique_id=1916470835 instance=ExtResource("23_80cyg")]
-visible = false
-power = 12
-item_model = ExtResource("25_8henu")
-
 [node name="Chest3" parent="NavigationRegion3D/Interactable" unique_id=1742280658 instance=ExtResource("19_574oa")]
 transform = Transform3D(-0.76042855, 0, -0.6494215, 0, 1, 0, 0.6494215, 0, -0.76042855, -12.611522, 0, 16.168056)
-
-[node name="ShieldIcon" parent="NavigationRegion3D/Interactable/Chest3" unique_id=1280568658 instance=ExtResource("24_mca5t")]
-visible = false
-protection = 15
 
 [node name="ShieldIcon2" parent="NavigationRegion3D/Interactable/Chest3" unique_id=47026148 instance=ExtResource("24_mca5t")]
 visible = false

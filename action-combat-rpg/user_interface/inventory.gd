@@ -74,8 +74,6 @@ func interact(item: ItemIcon) -> void:
 		get_tree().call_group("PlayerRig", "replace_weapon", item.item_model)
 	if item is ArmorIcon:
 		equip_item(item, armor_slot)
-		print("Item: %s", item)
-		print("Item Armor: %s", item)
 		get_tree().call_group("PlayerRig", "replace_armor", item.armor)
 	if item is ShieldIcon:
 		equip_item(item, shield_slot)
@@ -112,3 +110,4 @@ func load_items_from_persistent_data() -> void:
 	for item in PersistentData.get_equipped_items():
 		add_item(item)
 		interact(item)
+	gold = PersistentData.gold

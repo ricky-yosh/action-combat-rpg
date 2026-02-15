@@ -4,6 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://b3435wshgsjss" path="res://assets/3D_Assets/Environment/Wall_Stone_Gate_Bldg_01.glb" id="10_8rf6n"]
 [ext_resource type="PackedScene" uid="uid://d37w6xe6ege8h" path="res://assets/3D_Assets/Environment/Stone_Wall_Bldg_04.glb" id="11_dm1i0"]
 [ext_resource type="PackedScene" uid="uid://b3unfcgvlj4hi" path="res://assets/3D_Assets/Environment/Turret_Square_Bldg_02.glb" id="12_dd5ld"]
+[ext_resource type="PackedScene" uid="uid://bj0jfswrd8ywr" path="res://interactable/chest.tscn" id="17_hq812"]
+[ext_resource type="PackedScene" uid="uid://clg2yhduknmbm" path="res://user_interface/armor_icon.tscn" id="18_dh8cu"]
+[ext_resource type="PackedScene" uid="uid://tfvbn13uwhkj" path="res://user_interface/currency_icon.tscn" id="19_3du51"]
+[ext_resource type="PackedScene" uid="uid://ctii03klxetrs" path="res://enemy/enemy.tscn" id="19_6lebr"]
+[ext_resource type="PackedScene" uid="uid://dpr88r41j6q2c" path="res://user_interface/weapon_icon.tscn" id="20_0omru"]
+[ext_resource type="PackedScene" uid="uid://dgy1v8q2n374i" path="res://assets/3D_Assets/Character/Gear/Battleaxe.glb" id="21_osmeb"]
+[ext_resource type="PackedScene" uid="uid://53q0p70xsl47" path="res://user_interface/shield_icon.tscn" id="22_78ydb"]
 [ext_resource type="PackedScene" uid="uid://dc3uy31jvqiap" path="res://interactable/passage.tscn" id="28_fmcv5"]
 [ext_resource type="PackedScene" uid="uid://v2khj85gxssc" path="res://player/player.tscn" id="29_22dy2"]
 [ext_resource type="PackedScene" uid="uid://d1iw35njiby6o" path="res://assets/3D_Assets/Environment/Path_Gravel_Env_01.glb" id="30_eyx6k"]
@@ -277,6 +284,44 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.7
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7631942, 1.9113678, 18.208792)
 next_level = "uid://d14mf81cmioqs"
 
+[node name="Chest" parent="NavigationRegion3D/Interactable" unique_id=1743701802 instance=ExtResource("17_hq812")]
+transform = Transform3D(0.014119267, 0, -0.9999003, 0, 1, 0, 0.9999004, 0, 0.0141193, 6.47103, 0, 14.823869)
+
+[node name="ArmorIcon2" parent="NavigationRegion3D/Interactable/Chest" unique_id=2640944 instance=ExtResource("18_dh8cu")]
+visible = false
+protection = 40
+armor = 1
+
+[node name="Chest2" parent="NavigationRegion3D/Interactable" unique_id=734857572 instance=ExtResource("17_hq812")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 14.94582, 0, -3.9843159)
+
+[node name="CurrencyIcon" parent="NavigationRegion3D/Interactable/Chest2" unique_id=1308822222 instance=ExtResource("19_3du51")]
+visible = false
+value = 110
+
+[node name="WeaponIcon3" parent="NavigationRegion3D/Interactable/Chest2" unique_id=1971740999 instance=ExtResource("20_0omru")]
+visible = false
+power = 8
+
+[node name="Chest4" parent="NavigationRegion3D/Interactable" unique_id=1267153840 instance=ExtResource("17_hq812")]
+transform = Transform3D(0.075117834, 0, 0.9971747, 0, 1, 0, -0.9971746, 0, 0.07511783, -2.4361954, 0, -21.213194)
+
+[node name="WeaponIcon4" parent="NavigationRegion3D/Interactable/Chest4" unique_id=610703608 instance=ExtResource("20_0omru")]
+visible = false
+power = 12
+item_model = ExtResource("21_osmeb")
+
+[node name="Chest3" parent="NavigationRegion3D/Interactable" unique_id=418359093 instance=ExtResource("17_hq812")]
+transform = Transform3D(-0.9749012, 0, 0.22263753, 0, 1, 0, -0.22263756, 0, -0.97490126, -18.0327, 0, -6.4377537)
+
+[node name="ShieldIcon" parent="NavigationRegion3D/Interactable/Chest3" unique_id=1342960760 instance=ExtResource("22_78ydb")]
+visible = false
+protection = 15
+
+[node name="CurrencyIcon" parent="NavigationRegion3D/Interactable/Chest3" unique_id=543903015 instance=ExtResource("19_3du51")]
+visible = false
+value = 30
+
 [node name="Houses" type="Node3D" parent="NavigationRegion3D" unique_id=1380906247]
 
 [node name="House_Modular_01" parent="NavigationRegion3D/Houses" unique_id=1844707845 instance=ExtResource("36_2b4wk")]
@@ -292,3 +337,31 @@ transform = Transform3D(0.4226183, 0, -0.9063077, 0, 1, 0, 0.9063077, 0, 0.42261
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.016896725, 0.98121595, 15.881618)
 
 [node name="Enemy" type="Node3D" parent="." unique_id=139113487]
+
+[node name="Enemy1" parent="Enemy" unique_id=537702025 instance=ExtResource("19_6lebr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7013254, 1, -5.669878)
+speed = 0.0
+
+[node name="Enemy2" parent="Enemy" unique_id=891056102 instance=ExtResource("19_6lebr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3119726, 1, -6.507532)
+speed = 0.0
+
+[node name="Enemy3" parent="Enemy" unique_id=1748168790 instance=ExtResource("19_6lebr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.52285004, 1, -8.251764)
+speed = 0.0
+
+[node name="Enemy4" parent="Enemy" unique_id=499279646 instance=ExtResource("19_6lebr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.058967, 1, -3.221675)
+speed = 0.0
+
+[node name="Enemy5" parent="Enemy" unique_id=1809953766 instance=ExtResource("19_6lebr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.092548, 1, -8.707341)
+speed = 0.0
+
+[node name="Enemy6" parent="Enemy" unique_id=1363067017 instance=ExtResource("19_6lebr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4439964, 1, 2.0746346)
+speed = 0.0
+
+[node name="Enemy7" parent="Enemy" unique_id=108043352 instance=ExtResource("19_6lebr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.908847, 1, -4.2750664)
+speed = 0.0
