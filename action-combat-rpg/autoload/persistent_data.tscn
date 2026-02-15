@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://ccxwmkhgtl3ps"]
+
+[ext_resource type="Script" uid="uid://dfc10gpl6jtm6" path="res://persistent_data.gd" id="1_60ikv"]
+[ext_resource type="PackedScene" uid="uid://dpr88r41j6q2c" path="res://user_interface/weapon_icon.tscn" id="2_5iwxs"]
+[ext_resource type="PackedScene" uid="uid://53q0p70xsl47" path="res://user_interface/shield_icon.tscn" id="3_k4t71"]
+[ext_resource type="PackedScene" uid="uid://clg2yhduknmbm" path="res://user_interface/armor_icon.tscn" id="4_oww5s"]
+
+[node name="PersistentData" type="Control" unique_id=1671970773]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_60ikv")
+
+[node name="InventoryNode" type="Control" parent="." unique_id=203520621]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="WeaponNode" type="Control" parent="." unique_id=1431159530]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="WeaponIcon" parent="WeaponNode" unique_id=2044229391 instance=ExtResource("2_5iwxs")]
+layout_mode = 0
+
+[node name="ShieldNode" type="Control" parent="." unique_id=105807101]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="ShieldIcon" parent="ShieldNode" unique_id=1423845505 instance=ExtResource("3_k4t71")]
+layout_mode = 0
+protection = 20
+
+[node name="ArmorNode" type="Control" parent="." unique_id=1322248175]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="ArmorIcon" parent="ArmorNode" unique_id=2000480506 instance=ExtResource("4_oww5s")]
+layout_mode = 0
+protection = 10

@@ -28,6 +28,7 @@ signal armor_changed(protection: float)
 
 func _ready() -> void:
 	update_stats()
+	load_items_from_persistent_data()
 
 func update_stats() -> void:
 	strength_value.text = str(player.stats.strength.ability_score)
@@ -104,3 +105,10 @@ func get_armor_value() -> float:
 		armor += get_armor().protection
 	armor = clampf(armor, MIN_ARMOR_RATING, MAX_ARMOR_RATING)
 	return armor
+
+func load_items_from_persistent_data() -> void:
+	for item in PersistentData.get_inventory():
+		add_item(item)
+	for item in PersistentData.get_equipped_items():
+		add_item(item)
+		interact(item)
